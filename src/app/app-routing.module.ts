@@ -1,3 +1,4 @@
+import { SorpriseComponent } from './Modules/sorprise/sorprise.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,6 +12,9 @@ export const routes: Routes = [
   },
   {
     path: 'pokedex', loadChildren: () => import('./Modules/pokedex/pokedex.module').then(m => m.PokedexModule),
+  },
+  {
+    path: 'sorprise', component:SorpriseComponent
   },
 ];
 

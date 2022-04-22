@@ -1,3 +1,4 @@
+import { SorpriseComponent } from './Modules/sorprise/sorprise.component';
 import { PokedexComponent } from './Modules/pokedex/pokedex.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -20,6 +21,7 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     NavBarComponent,
     PokedexComponent,
+    SorpriseComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 .video-background-holder {
   position: relative;
-  background-color: rgb(255, 255, 255);
+  background-color: black;
   height: calc(100vh - 72px);
   min-height: 25rem;
   width: 100%;
@@ -33,7 +33,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(255, 255, 255);
+  background-color: black;
   opacity: 0.5;
   z-index: 1;
 }
