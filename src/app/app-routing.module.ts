@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './Modules/home/home.component';
 
 export const routes: Routes = [
+ //ADD ROUTES
   {path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home', component:HomeComponent
@@ -11,7 +12,6 @@ export const routes: Routes = [
   {
     path: 'pokedex', loadChildren: () => import('./Modules/pokedex/pokedex.module').then(m => m.PokedexModule),
   },
- //ADD ROUTES
 ];
 
 @NgModule({

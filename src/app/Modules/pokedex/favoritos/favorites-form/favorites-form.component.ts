@@ -1,10 +1,8 @@
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Favorite } from './../models/favorite';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PokedexFavoriteService } from '../../pokedex_favorite.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-// import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favorites-form',
@@ -12,14 +10,15 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./favorites-form.component.scss']
 })
 export class FavoritesFormComponent implements OnInit {
+
+  //ESTA VARIABLE RECIBE EL FAVORITO ENVIADO DESDE EL LISTADO
   @Input() public favorite: Favorite ={name:'',alias:''};
 
+  errValidation= false;
 
   constructor(
-    private route: ActivatedRoute,
     private pokedexFavoriteService:PokedexFavoriteService,
-    private modalService: NgbModal,
-    private router: Router
+    private modalService: NgbModal
     ) { }
 
   ngOnInit(): void {
@@ -27,14 +26,19 @@ export class FavoritesFormComponent implements OnInit {
   }
 
 
+
+
+//GUARDAMOS LOS CAMBIOS REALIZADOS EN EL MODELO, EN ESTE CASO SOLO ES ALIAS
 saveChanges(){
+  if(this.favorite.alias=='') {this.errValidation=true ;return;}
+
   this.pokedexFavoriteService.setItemInFavorites(this.favorite)
   this.closeModal()
 }
 
+//CIERRE DE MODAL
 closeModal(){
   this.modalService.dismissAll();
 }
-
 
 }

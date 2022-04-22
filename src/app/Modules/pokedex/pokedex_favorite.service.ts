@@ -7,6 +7,8 @@ export class PokedexFavoriteService {
   constructor() {}
 
   items:any[] = [];
+
+  //AGREGA A FAVORITO
   addToFavorites(addedItem: any) {
     this.items.push(addedItem);
     this.saveFavorite();
@@ -16,20 +18,23 @@ export class PokedexFavoriteService {
     return this.items;
   }
 
+  //OBTIENE DEL SESION STORAGE LOS FAVORITOS
   loadFavorites(): void {
     this.items = JSON.parse(sessionStorage.getItem('pokemon_favorites')||'[]') ?? [];
   }
 
+  //GUARDA EL FAVORITO EN EL SESSION STORAGE
   saveFavorite(): void {
     sessionStorage.setItem('pokemon_favorites', JSON.stringify(this.items));
   }
 
+  //LIMPIA LOS FAVORITOS DEL SESSION STORAGE
   clearFavorites(items=[]) {
     this.items = [];
-
     sessionStorage.removeItem("pokemon_favorites")
   }
 
+  //REMUEVE UN FAVORITO DEL SESSION STORAGE
   removeFavorite(name:string) {
     const index = this.items.findIndex(o => o.name == name);
     if (index > -1) {
@@ -38,10 +43,8 @@ export class PokedexFavoriteService {
     }
   }
 
-  itemInfavorites(item:any): boolean {
-    return this.items.findIndex(o => o.id === item.id) > -1;
-  }
 
+  //MODIFICA EL ALIAS DEL POKEMON FAVORITO
   setItemInFavorites(item:any){
     console.log(item)
     this.items.find(x=>x.name==item.name).alias=item.alias;

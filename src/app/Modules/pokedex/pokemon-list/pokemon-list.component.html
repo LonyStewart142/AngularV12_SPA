@@ -1,38 +1,67 @@
-<div class="container" >
-
+<div class="container">
+  <!-- ENCABEZADO Y PAGINACION -->
   <div class="row encabezado mt-2">
-     <div class="col-6">
+    <div class="col-6">
       <h3 class="d-inline-block ml-3">Listado de Pokemon</h3>
-     </div>
-     <div class="col-6 text-end">
-        <button class="btn  btn-outline-light text-primary border" [disabled]="pokedex?.previous==null"  (click)="previousPage()">Atras</button>
-        <button class="btn  btn-primary  ms-2"  (click)="nextPage()" >Siguiente Pagina</button>
-     </div>
-     <hr>
-  </div>
-    <div class="container_list_pokemon mt-2 ">
+    </div>
 
-      <div class="row">
-        <div class="pokemon col-md-3 col-xs-2 col-lg-2 col-sm-4 mb-2" *ngFor="let item of pokemons">
+    <hr>
+    <div class="col-12 text-center mb-3">
+      <button class="btn  btn-outline-light btn-sm text-primary border" [disabled]="pokedex?.previous==null"
+        (click)="previousPage()"><i class="bi bi-arrow-left-short"></i> Atras</button>
+      <button class="btn  btn-primary btn-sm  ms-2" (click)="nextPage()">
+        Siguiente Pagina
+        <i class="bi bi-arrow-right-short"></i>
+      </button>
+    </div>
+    <hr>
+  </div>
+
+  <!-- CONTENEDOR DONDE RENDERIZA EL LISTADO DE POKEMONES -->
+  <div class="container_list_pokemon mt-2 ">
+    <div class="row">
+      <div class="pokemon col-md-3 col-xs-2 col-lg-2 col-sm-4 mb-2" *ngFor="let item of pokemons">
         <div class="col-md-1"></div>
-          <div class="card">
-            <img src="https://static.wikia.nocookie.net/eswikia/images/d/df/Pok%C3%A9mon.png/revision/latest/scale-to-width-down/980?cb=20170308220152" class="card-img-top" height="100" width="100" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{item.name}}</h5>
-              <a  *ngIf="!item.isFavorite" (click)="addPokemonToFavorite(item)" class="btn btn-sm btn-outline-primary">Añadir</a>
-              <span  *ngIf="item.isFavorite"  class="badge bg-light text-success border ">Añadido a favorito</span>
+        <div class="card">
+          <img
+            src="https://static.wikia.nocookie.net/eswikia/images/d/df/Pok%C3%A9mon.png/revision/latest/scale-to-width-down/980?cb=20170308220152"
+            class="card-img-top" height="100" width="100" alt="...">
+          <div class="card-body">
+
+            <h5 class="card-title">{{item.name}}</h5>
+
+            <!-- VALIDA SI EL POKEMON ES FAVORITO -->
+
+            <div class="row isFavorite" *ngIf="!item.isFavorite">
+              <span class="badge bg-light text-secondary border fw-bold pb-2 col-8">
+                No Añadido
+              </span>
+              <span class="text-end col-4" style="font-size: 20px;margin-top: -5px; cursor: pointer;">
+                <i class="bi bi-star" (click)="addPokemonToFavorite(item)"></i>
+              </span>
+            </div>
+
+            <div class="row  isNotFavorite" *ngIf="item.isFavorite">
+              <span class="badge bg-light text-success border fw-bold pb-2 col-8">
+                Añadido
+              </span>
+
+              <span class="text-end col-4" style="font-size: 20px;margin-top: -5px; cursor: pointer;">
+                <i class="bi bi-star-fill text-end text-warning col-6" (click)="deleteFavorite(item)"></i>
+              </span>
 
             </div>
+            <!-- VALIDA SI EL POKEMON ES FAVORITO -->
+
           </div>
+        </div>
       </div>
 
-      </div>
+    </div>
 
-      <div class="loading_pokemons text-center"  *ngIf="loadingListado">
-        <app-loading></app-loading>
-      </div>
-   </div>
-
-
-
-
+    <iframe width="600" height="500" scrolling="no" frameborder="0" src="https://games.peta.org/pokemon-black-and-white-parody/WebContent/index.html"></iframe>
+    <!-- LOADING -->
+    <div class="loading_pokemons text-center" *ngIf="loadingListado">
+      <app-loading></app-loading>
+    </div>
+  </div>

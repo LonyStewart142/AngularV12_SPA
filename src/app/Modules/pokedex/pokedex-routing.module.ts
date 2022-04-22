@@ -1,4 +1,3 @@
-import { FavoritesFormComponent } from './favoritos/favorites-form/favorites-form.component';
 import { FavoritesListComponent } from './favoritos/favorites-list/favorites-list.component';
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
 import { PokedexComponent } from './pokedex.component';

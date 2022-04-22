@@ -18,7 +18,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PokedexRoutingModule,
-    FormsModule
+    FormsModule,
   ]
 })
 export class PokedexModule { }
