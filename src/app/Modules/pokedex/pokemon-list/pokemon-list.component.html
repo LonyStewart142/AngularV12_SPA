@@ -9,7 +9,8 @@
     <div class="col-12 text-center mb-3">
       <button class="btn  btn-outline-light btn-sm text-primary border" [disabled]="pokedex?.previous==null"
         (click)="previousPage()"><i class="bi bi-arrow-left-short"></i> Atras</button>
-      <button class="btn  btn-primary btn-sm  ms-2" (click)="nextPage()">
+
+      <button class="btn  btn-primary btn-sm  ms-2" (click)="nextPage()" [disabled]="pokedex?.next==null">
         Siguiente Pagina
         <i class="bi bi-arrow-right-short"></i>
       </button>
