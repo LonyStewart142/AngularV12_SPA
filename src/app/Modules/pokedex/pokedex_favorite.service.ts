@@ -30,8 +30,8 @@ export class PokedexFavoriteService {
     sessionStorage.removeItem("pokemon_favorites")
   }
 
-  removeItem(id:number) {
-    const index = this.items.findIndex(o => o.id === id);
+  removeFavorite(name:string) {
+    const index = this.items.findIndex(o => o.name == name);
     if (index > -1) {
       this.items.splice(index, 1);
       this.saveFavorite();
@@ -42,8 +42,9 @@ export class PokedexFavoriteService {
     return this.items.findIndex(o => o.id === item.id) > -1;
   }
 
-  setItemInFavorites(id:number,alias:string){
-    this.items.find(x=>x.id==id).alias=alias;
+  setItemInFavorites(item:any){
+    console.log(item)
+    this.items.find(x=>x.name==item.name).alias=item.alias;
     this.saveFavorite();
   }
 }

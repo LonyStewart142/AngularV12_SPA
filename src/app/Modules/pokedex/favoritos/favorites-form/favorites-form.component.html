@@ -1,1 +1,24 @@
-favorites form works
+
+
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Formulario de favorito </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form_favorite">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nombre</label>
+          <input readonly type="text" class="form-control" [(ngModel)]="favorite.name" id="name">
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">Alias</label>
+          <input  type="text" [(ngModel)]="favorite.alias" class="form-control" id="name">
+        </div>
+    </div>  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveChanges()">
+      <i class="bi bi-save"></i> Guardar
+    </button>
+  </div>
+
+

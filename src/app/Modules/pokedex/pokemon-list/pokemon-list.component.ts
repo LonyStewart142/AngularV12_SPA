@@ -1,3 +1,4 @@
+import { Favorite } from './../favoritos/models/favorite';
 import { Pokemon, Pokedex } from './models/pokemon';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -24,7 +25,6 @@ export class PokemonListComponent implements OnInit {
     // private toastService: ToastrService,
     private http:  HttpClient,
     private pokedexFavoriteService:PokedexFavoriteService,
-    private modalService: NgbModal,
 
   ) { }
 
@@ -64,7 +64,8 @@ loadSessionStorage(){
 
 
 addPokemonToFavorite(pokemon:Pokemon){
-  this.pokedexFavoriteService.addToFavorites(pokemon);
+  let fav: Favorite ={name:pokemon.name,alias:'',createdAt: new Date()}
+  this.pokedexFavoriteService.addToFavorites(fav);
   pokemon.isFavorite=true;
 }
 

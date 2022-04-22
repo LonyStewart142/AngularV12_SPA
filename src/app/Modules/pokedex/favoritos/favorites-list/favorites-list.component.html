@@ -1,1 +1,45 @@
-favorites list works
+<div class="container" >
+
+  <div class="row encabezado mt-2">
+      <h3 class="d-inline-block ml-3">Listado de favoritos</h3>
+      <hr>
+  </div>
+    <div class="container_list_favoritos mt-2 ">
+
+      <div class="row">
+        <table class="table table-striped ">
+          <thead>
+            <tr>
+              <th scope="col">Imagen</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Alias</th>
+              <th scope="col">Fecha creación</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let fav of favorites">
+              <td>
+                <img src="https://imagenpng.com/wp-content/uploads/2016/09/Pikachu-png-0.png" height="40" width="40">
+              </td>
+              <td class="fw-bold"> {{fav.name}}</td>
+              <td *ngIf="fav.alias==''">Sin alias</td>
+              <td *ngIf="fav.alias!=''">{{fav.alias}}</td>
+              <td>{{fav.createdAt |date}}</td>
+              <td>
+                <button class="btn btn-warning"  (click)="openModal(fav)">
+                  <i class="bi bi-pencil-square"></i>  Modificar
+                </button>
+                <button class="btn btn-danger ms-2" (click)="deleteFavorite(fav)">
+                  <i class="bi bi-trash3 text-white"  ></i> Eliminar
+              </button>
+              </td>
+            </tr>
+          </tbody>
+
+        </table>
+
+      </div>
+
+   </div>
+

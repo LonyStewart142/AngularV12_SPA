@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Favorite } from './../models/favorite';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PokedexFavoriteService } from '../../pokedex_favorite.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 // import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -9,34 +12,29 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./favorites-form.component.scss']
 })
 export class FavoritesFormComponent implements OnInit {
+  @Input() public favorite: Favorite ={name:'',alias:''};
 
 
   constructor(
-    // private toastService: ToastrService,
     private route: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder) { }
+    private pokedexFavoriteService:PokedexFavoriteService,
+    private modalService: NgbModal,
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
-    let id = Number(this.route.snapshot.paramMap.get('id'));
-    this.CreateForm();
+
   }
 
 
-  private CreateForm() {
+saveChanges(){
+  this.pokedexFavoriteService.setItemInFavorites(this.favorite)
+  this.closeModal()
+}
 
-    // this.Formulario = this.formBuilder.group({
-    //   id: [0],
-    //   codigoReferencia: [null,],
-    //   tipoSolicitudID: [1, [Validators.required]],
-    //   comentario: [null,],
-    //   solicitanteDepartamentoID: [0,],
-    //   solicitanteSucursalID: [0,],
-    // });
-  }
-
-
-
+closeModal(){
+  this.modalService.dismissAll();
+}
 
 
 }
