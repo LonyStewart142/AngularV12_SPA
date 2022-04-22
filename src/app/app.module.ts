@@ -18,7 +18,6 @@ import { RouterModule } from '@angular/router';
   declarations: [
     AppComponent,
     NavBarComponent,
-    LoadingComponent,
     PokedexComponent,
   ],
   imports: [

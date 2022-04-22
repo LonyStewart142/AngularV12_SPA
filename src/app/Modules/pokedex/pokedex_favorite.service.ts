@@ -17,7 +17,7 @@ export class PokedexFavoriteService {
   }
 
   loadFavorites(): void {
-    this.items = JSON.parse(sessionStorage.getItem("pokemon_favorites") || "") ?? [];
+    this.items = JSON.parse(sessionStorage.getItem('pokemon_favorites')||'[]') ?? [];
   }
 
   saveFavorite(): void {

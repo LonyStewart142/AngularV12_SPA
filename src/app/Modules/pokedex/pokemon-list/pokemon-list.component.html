@@ -1,14 +1,13 @@
 <div class="container" >
 
-  <div class=" encabezado mt-2">
-     <h3 class="d-inline-block ml-3">Listado de Pokemon</h3>
-     <!-- <button [disabled]="loadingListado" (click)="getUsers()" type="button" class="btn btn-outline-secondary d-inline-block " style="margin-left: 10px;" >
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-      </svg>
-
-     </button>  -->
+  <div class="row encabezado mt-2">
+     <div class="col-6">
+      <h3 class="d-inline-block ml-3">Listado de Pokemon</h3>
+     </div>
+     <div class="col-6 text-end">
+        <button class="btn  btn-outline-light text-primary border" [disabled]="pokedex?.previous==null"  (click)="previousPage()">Atras</button>
+        <button class="btn  btn-primary  ms-2"  (click)="nextPage()" >Siguiente Pagina</button>
+     </div>
      <hr>
   </div>
     <div class="container_list_pokemon mt-2 ">
@@ -20,12 +19,18 @@
             <img src="https://static.wikia.nocookie.net/eswikia/images/d/df/Pok%C3%A9mon.png/revision/latest/scale-to-width-down/980?cb=20170308220152" class="card-img-top" height="100" width="100" alt="...">
             <div class="card-body">
               <h5 class="card-title">{{item.name}}</h5>
-              <a  (click)="addPokemonToFavorite(item)" class="btn btn-outline-primary">Añadir</a>
+              <a  *ngIf="!item.isFavorite" (click)="addPokemonToFavorite(item)" class="btn btn-sm btn-outline-primary">Añadir</a>
+              <span  *ngIf="item.isFavorite"  class="badge bg-light text-success border ">Añadido a favorito</span>
+
             </div>
           </div>
       </div>
 
-    </div>
+      </div>
+
+      <div class="loading_pokemons text-center"  *ngIf="loadingListado">
+        <app-loading></app-loading>
+      </div>
    </div>
 
 

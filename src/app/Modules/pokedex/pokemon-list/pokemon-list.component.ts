@@ -13,7 +13,12 @@ import { PokedexFavoriteService } from '../pokedex_favorite.service';
 export class PokemonListComponent implements OnInit {
 
   pokemons:Pokemon[]=[];
+  pokemonsFavStorage:Pokemon[]=[];
+
   pokedex :Pokedex | undefined;
+  urlHttp:string='https://pokeapi.co/api/v2/pokemon?limit=10&offset=0';
+
+  loadingListado=true;
 
   constructor(
     // private toastService: ToastrService,
@@ -25,30 +30,62 @@ export class PokemonListComponent implements OnInit {
 
 
   ngOnInit(): void {
+      this.loadSessionStorage();
       this.getData()
-      this.pokedexFavoriteService.loadFavorites();
   }
 
+loadSessionStorage(){
+  this.pokedexFavoriteService.loadFavorites();
+  this.pokemonsFavStorage= this.pokedexFavoriteService.getfavorites();
+  console.log( this.pokemonsFavStorage)
 
+}
   getData(){
-    this.http.get<Pokedex>('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0').subscribe(response => {
-      this.pokedex=response;
-      this.pokemons= this.pokedex.results;
+    this.pokemons=[];
+
+    this.loadingListado=true;
+    this.http.get<Pokedex>(this.urlHttp).subscribe(response => {
+
+      setTimeout(() => {
+        this.pokedex=response;
+        this.pokemons= this.pokedex.results;
+        this.pokemons.forEach(x=>{
+         x.isFavorite= this.isPokemonFavorite(x);
+        })
+        console.log(this.pokemons)
+        this.loadingListado=false;
+      }, 400);
+
     }, err=>{
+      this.loadingListado=false;
       console.log(err)
     })
   }
 
 
 addPokemonToFavorite(pokemon:Pokemon){
-//
-this.pokedexFavoriteService.addToFavorites(pokemon);
-console.log(pokemon)
+  this.pokedexFavoriteService.addToFavorites(pokemon);
+  pokemon.isFavorite=true;
 }
 
 
+previousPage(){
+  this.urlHttp=this.pokedex?.previous || this.urlHttp;
+  this.getData();
+}
+nextPage(){
+  this.urlHttp=this.pokedex?.next || this.urlHttp;
+  this.getData()
 }
 
+
+isPokemonFavorite(pokemon:Pokemon):boolean {
+ if(this.pokemonsFavStorage?.find(p=>p.name==pokemon.name)){
+   return true;
+ }
+  return false;
+}
+}
 
 
 
